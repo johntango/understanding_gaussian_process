@@ -1,4 +1,4 @@
-from gp import GP, ExponentialSquaredKernel
+from gp import GP, SquaredExponentialKernel
 import numpy as np
 from scipy.stats import multivariate_normal
 import matplotlib.pyplot as plt
@@ -12,21 +12,17 @@ import tensorflow as tf
 import matplotlib
 
 
-
 # Set values to model parameters.
 lengthscale = 1
 signal_variance = 1.
 noise_variance = 0.1
 
 
-
-
 k = gpflow.kernels.Matern52(input_dim=1)
 
 
-
 def plotkernelsample(k, xmin=0, xmax=3):
-    xx = np.linspace(xmin, xmax, 300)[:,None]
+    xx = np.linspace(xmin, xmax, 300)[:, None]
     K = k.K(xx)
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
@@ -37,4 +33,3 @@ def plotkernelsample(k, xmin=0, xmax=3):
 
 
 plotkernelsample(k)
-
